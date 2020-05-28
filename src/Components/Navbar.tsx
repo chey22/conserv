@@ -3,14 +3,14 @@ import { Navbar, Nav } from "react-bootstrap";
 
 //interface NavbarProps extends RouteComponentProps { };
 
-const Navvy: FC = () => {
+const Navi: FC = () => {
   return (
-    <div className="navvy">
+    <div className="navi">
       <Navbar bg="white">
         <Navbar.Brand href="#home">
           <img
             src="assets/Conserv500.png"
-            width="400px"
+            width="300px"
             alt="Conserv.io Logo"
             className="d-inline-block align-top"
           />{" "}
@@ -21,4 +21,4 @@ const Navvy: FC = () => {
   );
 };
 
-export default Navvy;
+export default Navi;
