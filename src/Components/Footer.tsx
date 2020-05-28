@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
+import '../styles.css'
 
 const Footer: FC = () => {
     return(
         <div className='footer'>
-            <h1>Footer Placeholder</h1>
+            <p>Cheyenne Mangum - Conserv Interview Project</p>
         </div>
     )
 }
