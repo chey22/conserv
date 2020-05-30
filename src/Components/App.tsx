@@ -8,8 +8,20 @@ const App: FC = () => {
   return (
     <div className="app">
       <Navi />
+      <h1>butt</h1>
+        <h1>butt</h1>
+        <h1>butt</h1>
+        <h1>butt</h1>
+        <h1>butt</h1>
+        <h1>butt</h1>
       <Header />
       <Body />
+      <h1>butt</h1>
+        <h1>butt</h1>
+        <h1>butt</h1>
+        <h1>butt</h1>
+        <h1>butt</h1>
+        <h1>butt</h1>
       <Footer />
     </div>
   );

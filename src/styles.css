@@ -16,3 +16,12 @@
     font-size: 20px;
     padding: 40px;
 }
+
+.chart {
+    width: 100%;
+}
+
+/* selects all button elements inside .chart */
+/* .chart button {
+    background-color: #e74a3b;
+} */
