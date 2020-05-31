@@ -5,7 +5,7 @@ import { Navbar, Nav } from "react-bootstrap";
 
 const Navi: FC = () => {
   return (
-    <div className="navi">
+    <nav className="navbar-expand-md navbar-white sticky-top">
       <Navbar bg="white">
         <Navbar.Brand href="#home">
           <img
@@ -17,7 +17,7 @@ const Navi: FC = () => {
         </Navbar.Brand>
         <Nav className="ml-auto">Account</Nav>
       </Navbar>
-    </div>
+    </nav>
   );
 };
 
