@@ -25,18 +25,18 @@ const RH: FC = () => {
 
     return(
 
-        <div className="container">
-            <div className="row">
-                <div className="col-md-12">
-                    <ul className="list-group">
-                        {humid.map(humidInstance => (
-                            <li key={humidInstance['bucket']} className="list-group-item">{humidInstance['avg_rh']}</li> // ordinarily would use {humidInstance.bucket, but TS seems to want the dot notation replaced with bracket notation }
-                        ))}
-                    </ul>
-                </div>
-            </div>
-        </div>
-
+        // <div className="container">
+        //     <div className="row">
+        //         <div className="col-md-12">
+        //             <ul className="list-group">
+        //                 {humid.map(humidInstance => (
+        //                     <li key={humidInstance['bucket']} className="list-group-item">{humidInstance['avg_rh']}</li> // ordinarily would use {humidInstance.bucket, but TS seems to want the dot notation replaced with bracket notation }
+        //                 ))}
+        //             </ul>
+        //         </div>
+        //     </div>
+        // </div>
+<h1>RH Placeholder</h1>
     )
 }
 

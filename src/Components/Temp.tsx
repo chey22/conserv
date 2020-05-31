@@ -8,8 +8,10 @@ import {
   Tooltip,
   Legend,
   Line,
+  ResponsiveContainer,
 } from "recharts";
-import { Card, Button } from "react-bootstrap";
+import { Card} from "react-bootstrap";
+import ChartToggles from "./ChartToggles";
 
 const testData = [
   { date: "2020-05-22T04:00:00.000Z", avg_temp1: 24.19 },
@@ -23,7 +25,6 @@ const testData = [
 
 const data2: any = [];
 const Temp: FC = () => {
-  
   axios({
     method: "get", //default
     url: "https://app.conserv.io/data/api/health/db",
@@ -69,44 +70,36 @@ const Temp: FC = () => {
     //console.log(values[0]);
   });
   return (
-    <div className="chart">
-      <Card style={{ width: "100%" }}>
-        <Card.Body>
-          <Card.Title>Temperature</Card.Title>
-          <Card.Body>
-            <div className="temp">
-              <LineChart
-                width={600} //how to change to % to decrease card size?
-                height={300}
-                data={data2}
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-              >
-                <XAxis dataKey="bucket" />
-                <YAxis
-                  type="number"
-                  domain={["auto", "auto"]}
-                  // ticks={[23, 23.5, 24, 24.5, 25]}
-                />
-                <CartesianGrid strokeDasharray="3 3" />
-                <Tooltip />
-                <Legend />
-                <Line
-                  name="Average Temperature"
-                  type="monotone"
-                  dataKey="avg_temp1"
-                  stroke="#82ca9d"
-                />
-              </LineChart>
-            </div>
-          </Card.Body>
-          <div className="chartToggle text-center">
-            <Button variant="secondary">°C / °F</Button>{" "}
-            <Button variant="secondary">Avg Temp</Button>{" "}
-            <Button variant="secondary">Min Temp</Button>{" "}
-            <Button variant="secondary">Max Temp</Button>{" "}
-          </div>
-        </Card.Body>
-      </Card>
+    <div className="card stacked-graph-card shadow-lg border-none">
+      <Card.Header as="h4">Temperature</Card.Header>
+      <Card.Body>
+        <Card.Title>card title placeholder</Card.Title>
+        <ResponsiveContainer width="100%" height={450}>
+          <LineChart
+            data={data2}
+            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+          >
+            <XAxis dataKey="bucket" />
+            <YAxis
+              type="number"
+              domain={["auto", "auto"]}
+
+            />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip />
+            <Legend />
+            <Line
+              name="Average Temperature"
+              type="monotone"
+              dataKey="avg_temp1"
+              stroke="#82ca9d"
+            />
+          </LineChart>
+        </ResponsiveContainer>
+      </Card.Body>
+      <Card.Footer>
+        <ChartToggles />
+      </Card.Footer>
     </div>
   );
 };

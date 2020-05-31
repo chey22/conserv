@@ -7,22 +7,26 @@ import Footer from "./Footer";
 const App: FC = () => {
   return (
     <div className="app">
-      <Navi />
-      <h1>butt</h1>
-        <h1>butt</h1>
-        <h1>butt</h1>
-        <h1>butt</h1>
-        <h1>butt</h1>
-        <h1>butt</h1>
-      <Header />
-      <Body />
-      <h1>butt</h1>
-        <h1>butt</h1>
-        <h1>butt</h1>
-        <h1>butt</h1>
-        <h1>butt</h1>
-        <h1>butt</h1>
-      <Footer />
+      <nav className="navbar-expand-md navbar-white sticky-top">
+        <Navi />
+        <Header />
+      </nav>
+      <div className="app-body col-12">
+        <div className="container-fluid">
+          <div className="row">
+            <div>
+              <h1>other</h1>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-12">
+              <Body />
+              <h1>other</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+          <Footer />
     </div>
   );
 };

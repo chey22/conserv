@@ -1,9 +1,9 @@
-.navi {
+/* .navi {
     position: sticky;
     top: 0;
     width: 100%;
     font-size: 20px;
-}
+} */
 
 .footer {
     position: fixed;
@@ -17,11 +17,12 @@
     padding: 40px;
 }
 
-.chart {
+/* .shadow-lg {
     width: 100%;
-}
+} */
 
 /* selects all button elements inside .chart */
 /* .chart button {
     background-color: #e74a3b;
 } */
+ 
