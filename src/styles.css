@@ -6,8 +6,6 @@
 } */
 
 .footer {
-  position: fixed;
-  bottom: 0;
   background-color: #e74a3b;
   height: 80px;
   width: 100%;
@@ -17,9 +15,9 @@
   padding: 40px;
 }
 
-/* .shadow-lg {
-    width: 100%;
-} */
+.degreeToggle {
+    display: inline;
+}
 
 /* selects all button elements inside .chart */
 /* .chart button {

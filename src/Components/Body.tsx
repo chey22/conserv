@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import Temp from "./Temp";
 import RH from "./RH";
+import Dewpoint from "./Dewpoint";
 
 const Body: FC = () => {
   return (
@@ -15,6 +16,7 @@ const Body: FC = () => {
           <div className="col-lg-12">
             <h1>Body Placeholder</h1>
             <Temp />
+            <Dewpoint />
             <RH />
           </div>
         </div>

@@ -12,7 +12,8 @@ import {
 } from "recharts";
 import { Card } from "react-bootstrap";
 import moment from 'moment'
-import ChartToggles from "./ChartToggles";
+import DegreeToggle from "./DegreeToggle";
+//import ButtTemp from './ConvertTemp'
 
 // TO DO
 // include avg_temp2, min_temp1, min_temp2, max_temp1, max_temp2
@@ -35,14 +36,22 @@ const Temp: FC = () => {
     //   avTemp.push(avTemp[k]);
     // }
 
-    let dataArr = avTemp.map(Object.values);
-    console.log(dataArr);
+    let avTempArr = avTemp.map(Object.values); // converts from array of objects to array of arrays
+    console.log(avTempArr);
     setAvTemp(avTemp);
   };
 
   useEffect(() => {
     getAvTemp();
   }, []); // pass in values that you want to monitor for changes into the array in second arg
+
+  const toCelsius: any = (fahrenheit: any) => {
+    return ((fahrenheit - 32) * 5) / 9;
+  };
+
+  const toFahrenheit: any = (celsius: any) => {
+    return (celsius * 9) / 5 + 32;
+  };
 
   return (
     <div className="card stacked-graph-card shadow-lg border-none">
@@ -100,7 +109,10 @@ const Temp: FC = () => {
         </ResponsiveContainer>
       </Card.Body>
       <Card.Footer>
-        <ChartToggles />
+        <DegreeToggle
+        // toCelsius={toCelsius}
+        // toFahrenheit={toFahrenheit}
+        />
       </Card.Footer>
     </div>
   );

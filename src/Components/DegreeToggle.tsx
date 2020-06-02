@@ -1,132 +1,141 @@
-import React, { FC, useState, useEffect } from 'react';
-import axios from 'axios';
-import { ToggleButtonGroup, ToggleButton } from 'react-bootstrap';
+import React, { FC, useState, useEffect } from "react";
+import axios from "axios";
+import { ToggleButtonGroup, ToggleButton } from "react-bootstrap";
 
-// const TemperatureInput = (props: any) => {
-//   const {scale, value} = props
-//   // /**
-//   //  *  @desc Call when we change the temperature value and 
-//   //  * call the parent onChange method to update the props
-//   //  *  @param {object}  event
-//   // */
-//   const handleChange = (e: any) =>  {
-//     props.onChange(e.target.value);
-//   }
-//   return (
-//     <div className="container">
-//         <form>
-//           <div className= "form-group">
-//             <h3>Enter Temperature in {scale}: </h3>
-//             <input className="form-control container text-center" id="focusedInputed" type="text" value={value}
-//                     onChange={handleChange} />
-//           </div>
-//         </form>
-//       </div>
-//   );
-// }
-// /**
-//  * @desc Calculator functional component that will handle the calculations
-//  */
-const Calculator = () => {
-  const [ scale, setScale ] =  useState('Celsius')
-  const [ value, setValue]  =  useState([])
-  // /** 
-  //  * @desc useEffect hook to get the temperature value
-  //  * @return {func} that will call when component unmount 
-  // */
-  useEffect( () => {
-    const getValue = async () => {
-    let res = await axios.get("https://app.conserv.io/data/api/health/db")
-    let value = res.data
-    let dataArr = value.map(Object.values);
-    console.log(dataArr);
-
-    setValue(value)
-    console.log(value)
-    }
-    getValue();
-    // return () => { setScale("")  }
-  },[])
-  // /** 
-  //  * @desc useEffect hook that will console the values when props update 
-  // */
-  useEffect( () => {
-    setTimeout(() => {
-      console.log(`Changed ${scale} value to ${value}`);
-    }, 100);
-  })
+const TemperatureInput = (props: any) => {
+  const { scale, avTemp } = props;
   // /**
-  //  *  @desc Call when we change the Celsius value 
-  //  *  @param {string} value
+  //  *  @desc Call when we change the temperature value and
+  //  * call the parent onChange method to update the props
+  //  *  @param {object}  event
   // */
-  const handleCelsiusChange = (value: any) => {
-    setValue(value)
+  const handleChange = (e: any) => {
+    props.onChange(e.target.value);
+  };
+
+
+return (
+  <div className="container">
+    {/* <div>
+      <form>
+        <div className= "form-group">
+          <h3>Enter Temperature in {scale}: </h3>
+          <input className="form-control container text-center" id="focusedInputed" type="text" value={avTemp}
+                  onChange={handleChange} />
+        </div>
+      </form>
+    </div> */}
+        <div className="degreeToggle text-center">
+      <ToggleButtonGroup type="radio" name="options" defaultValue={1}>
+        <ToggleButton
+          name={scale}
+          variant="secondary"
+          value={scale}
+          onChange={handleChange}
+        >
+          °C
+        </ToggleButton>
+        <ToggleButton
+          variant="secondary"
+          value={scale}
+          onChange={handleChange}
+        >
+          °F
+        </ToggleButton>
+      </ToggleButtonGroup>
+    </div>
+    </div>
+);
+}
+
+const DegreeToggle: FC = () => {
+  const [scale, setScale] = useState("Celsius");
+  const [avTemp, setAvTemp] = useState([]);
+
+  useEffect(() => {
+    const getAvTemp = async () => {
+      let res = await axios.get("https://app.conserv.io/data/api/health/db");
+      let avTemp: any = res.data;
+      let avTempArr = avTemp.map(Object.values);
+      console.log(avTempArr);
+
+      setAvTemp(avTemp);
+      console.log(avTemp);
+    };
+    getAvTemp();
+    return () => {
+      setScale("");
+    };
+  }, []);
+
+  const handleCelsiusChange = (avTemp: any) => {
+    setAvTemp(avTemp);
     //console.log('handled celc')
-  }
+  };
   // /**
-  //  *  @desc Call when we change the Fahrenheit value 
-  //  *  @param {string} value
+  //  *  @desc Call when we change the Fahrenheit avTemp
+  //  *  @param {string} avTemp
   // */
-  const handleFahrenheitChange = (value: any) => {
-    setScale('Fahrenheit')
-    setValue(value)
-    //console.log('handled fahr')
-  }
-  // /**
-  //  *  @desc To  covert the  celsius, fahrenheit values
-  //  *  @param {string} value
-  //  *  @param {func} convert
-  // */
-  const tryConvert = (value: any, convert: any) => {
-    const input = parseFloat(value);
+  const handleFahrenheitChange = (avTemp: any) => {
+    setScale("Fahrenheit");
+    setAvTemp(avTemp);
+    console.log(avTemp);
+  };
+
+  const tryConvert = (avTemp: any, convert: any) => {
+    const input = parseFloat(avTemp);
     if (Number.isNaN(input)) {
-      return '';
+      return "";
     }
     const output = convert(input);
-    const rounded = Math.round(output * 1000) / 1000;
-    return rounded.toString();
-  }
-  // /** @desc To convert value in celsius */
-  const toCelsius = (fahrenheit: any) => {
-    return (fahrenheit - 32) * 5 / 9;
-  }
-  // /** @desc To convert value in fahrenheit */
-  const toFahrenheit = (celsius: any) => {
-    return (celsius * 9 / 5) + 32;
-  }
-  const celsius = scale === 'Fahrenheit' ? tryConvert(value, toCelsius) : value;
-  const fahrenheit = scale === 'Celsius' ? tryConvert(value, toFahrenheit) : value;
-    return (
-          <div className="degreeToggle text-center">
-    <ToggleButtonGroup type="radio"
-    name="options"
-    defaultValue={1}
-    >
-      <ToggleButton variant="secondary" value={1}
-    onChange={handleCelsiusChange}>
-        °C
-      </ToggleButton>
-      <ToggleButton variant="secondary" value={2}
-          onChange={handleFahrenheitChange}>
-        °F
-      </ToggleButton>
-    </ToggleButtonGroup>
+    return output.toString();
+  };
+
+  const toCelsius = (fahrenheit: number) => {
+    return ((fahrenheit - 32) * 5) / 9;
+  };
+
+  const toFahrenheit = (celsius: number) => {
+    return (celsius * 9) / 5 + 32;
+  };
+  const celsius: any =
+    scale === "Fahrenheit" ? tryConvert(avTemp, toCelsius) : avTemp;
+  const fahrenheit: any =
+    scale === "Celsius" ? tryConvert(avTemp, toFahrenheit) : avTemp;
+
+  return (
+    // <div className="degreeToggle text-center">
+    //   <ToggleButtonGroup type="radio" name="options" defaultValue={celsius}>
+    //     <ToggleButton
+    //       variant="secondary"
+    //       value={celsius}
+    //       onChange={handleCelsiusChange}
+    //     >
+    //       °C
+    //     </ToggleButton>
+    //     <ToggleButton
+    //       variant="secondary"
+    //       value={fahrenheit}
+    //       onChange={handleFahrenheitChange}
+    //     >
+    //       °F
+    //     </ToggleButton>
+    //   </ToggleButtonGroup>
+    // </div>
+    <div className="text-center container-fluid">
+      <TemperatureInput
+        scale="Celsius"
+        value={celsius}
+        onChange={handleCelsiusChange} />
+      <TemperatureInput
+        scale="Fahrenheit"
+        value={fahrenheit}
+        onChange={handleFahrenheitChange} />
     </div>
   );
-      // <div className="text-center container-fluid">
-      //   <TemperatureInput
-      //     scale="Celsius"
-      //     value={celsius}
-      //     onChange={handleCelsiusChange} />
-      //   <TemperatureInput
-      //     scale="Fahrenheit"
-      //     value={fahrenheit}
-      //     onChange={handleFahrenheitChange} />
-      // </div>
-    // );
-}
-export default Calculator
-
+  // );
+};
+export default DegreeToggle;
 
 // import React, { FC, useState, useEffect } from "react";
 // import { ToggleButton, ToggleButtonGroup } from "react-bootstrap";
