@@ -24,8 +24,13 @@
     background-color: #e74a3b;
 } */
 
+.card-header {
+    background-color: #686868;
+    color: white;
+}
+
 .recharts-default-legend {
     position: relative;
-    height: 50px;
-    top: 40px;
+    top: 50px;
+    font-size: 20px;
 }

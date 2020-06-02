@@ -14,40 +14,40 @@ import { Card } from "react-bootstrap";
 import moment from "moment";
 //import CustomTooltip from "../CustomTooltip";
 
-const Dewpoint: FC = () => {
-  const [dew, setDew] = useState([]);
+const Temp: FC = () => {
+  const [temp, setTemp] = useState([]);
 
-  const getDew = async () => {
+  const gettemp = async () => {
     let response = await axios.get("https://app.conserv.io/data/api/health/db");
 
-    let dew = response.data; // array of objects
+    let temp = response.data; // array of objects
 
-    // dew.sort(function (a: any, b: any) { // sorts by bucket. likely unnecessary since API does too 
+    // temp.sort(function (a: any, b: any) { // sorts by bucket. likely unnecessary since API does too 
     //   return a.bucket - b.bucket;
     // });
 
-    // let dewArr = dew.map(Object.values); // converts from array of objects to array of arrays
-    // console.log(dewArr);
+    // let tempArr = temp.map(Object.values); // converts from array of objects to array of arrays
+    // console.log(tempArr);
 
-    setDew(dew); // sets state after sorting chronologically
+    setTemp(temp); // sets state after sorting chronologically
 
-    // for (var k in dew) { // this doubles the array for some reason unless placed after the state is set. *still doubles chart lines, so likely unnecessary
-    //   dew.push(dew[k]);
+    // for (var k in temp) { // this doubles the array for some reason unless placed after the state is set. *still doubles chart lines, so likely unnecessary
+    //   temp.push(temp[k]);
     // }
   };
 
   useEffect(() => {
-    getDew();
+    gettemp();
   }, []); // pass in values that you want to monitor for changes into the array in second arg
 
   return (
     <div className="card stacked-graph-card shadow-lg border-none my-5">
-      <Card.Header as="h4">Dewpoint</Card.Header>
+      <Card.Header as="h4">Temperature</Card.Header>
       <Card.Body>
         <Card.Title>card title placeholder - how to put legend here if desired?</Card.Title>
         <ResponsiveContainer width="100%" height={450}>
           <LineChart
-            data={dew}
+            data={temp}
             margin={{ top: 5, right: 30, left: 20, bottom: 40 }}
           >
             <XAxis
@@ -86,14 +86,32 @@ const Dewpoint: FC = () => {
             //wrapperStyle={{position: "absolute", height: "60px", padding: "12px"}}
             />
             <Line
-              name="Average Dewpoint"
+              name="Average Temperature"
               type="monotone"
-              dataKey="avg_dewpoint"
+              dataKey="avg_temp1"
               strokeWidth={2}
               stroke="#2ca82c" // green = avg temp
               dot={false}
               activeDot={{ r: 5 }} // slightly incr the radius of the dot that's moused over
             />
+                        {/* <Line
+              name="Minimum Temperature"
+              type="monotone"
+              dataKey="min_temp1"
+              strokeWidth={2}
+              stroke="#3b94e7" // blue = cold temp
+              dot={false}
+              activeDot={{ r: 5 }}
+            />
+            <Line
+              name="Maximum Temperature"
+              type="monotone"
+              dataKey="max_temp1"
+              strokeWidth={2}
+              stroke="#a82c2c" // red = warm temp
+              dot={false}
+              activeDot={{ r: 5 }}
+            /> */}
           </LineChart>
         </ResponsiveContainer>
       </Card.Body>
@@ -101,4 +119,4 @@ const Dewpoint: FC = () => {
     </div>
   );
 };
-export default Dewpoint;
+export default Temp;
