@@ -1,25 +1,31 @@
 import React, { FC, useState, useEffect } from "react";
 import axios from "axios";
 import { Card, ListGroup } from "react-bootstrap";
+import moment from "moment";
 
-const displayTooltip = (props: any) => {
-  const { payload, label, active } = props;
+const DisplayTooltip = (props: any) => {
+  const { payload, label } = props;
 
-  const handleChange = (e: any) => {
-    props.onChange(e.target.value);
-  };
-
+//   const handleChange = (e: any) => {
+//     props.onChange(e.target.value);
+//   };
+headerLabel(label) {
+    if (label === data) {
+        return "ok"
+    }
+}
   return (
     <Card style={{ width: "18rem" }}>
-      <Card.Header>Featured</Card.Header>
+      <Card.Header>{(label: moment.MomentInput) => moment(label).utcOffset(0).format('MM/DD h:mm A')}</Card.Header>
       <ListGroup variant="flush">
-        <ListGroup.Item>Cras justo odio</ListGroup.Item>
-        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
+        {/* <ListGroup.Item>Cras justo odio{ !payload[0].value ? 0 : payload[0].value }</ListGroup.Item> */}
+  <ListGroup.Item>Dapibus ac facilisis in{headerLabel(label)}</ListGroup.Item>
         <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
       </ListGroup>
     </Card>
   );
 };
+
 
 const CustomTooltip: FC = () => {
   const [stat, setStat] = useState([]);
@@ -37,15 +43,21 @@ const CustomTooltip: FC = () => {
   }, []); // pass in values that you want to monitor for changes into the array in second arg
 
   return (
-    <div>
-      <ul className="list-group">
-        {stat.map((statInstance) => (
-          <li key={statInstance["bucket"]} className="list-group-item">
-            {statInstance["avg_rh"]}
-          </li> // ordinarily would use {statInstance.bucket, but TS seems to want the dot notation replaced with bracket notation }
-        ))}
-      </ul>
-    </div>
+    <div className="text-center container-fluid">
+    <DisplayTooltip
+      payload={stat}
+      label={stat}
+      />
+  </div>
+    // <div>
+    //   <ul className="list-group">
+    //     {stat.map((statInstance) => (
+    //       <li key={statInstance["bucket"]} className="list-group-item">
+    //         {statInstance["avg_rh"]}
+    //       </li> // ordinarily would use {statInstance.bucket, but TS seems to want the dot notation replaced with bracket notation }
+    //     ))}
+    //   </ul>
+    // </div>
   );
 };
 
