@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import Temp from "./Temp";
 import RH from "./RH";
-import Dewpoint from "./Dewpoint";
+import Dewpoint from "./Charts/Dewpoint";
 
 const Body: FC = () => {
   return (

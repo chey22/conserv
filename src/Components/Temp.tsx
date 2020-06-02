@@ -83,28 +83,32 @@ const Temp: FC = () => {
             //wrapperStyle={{position: "absolute", height: "60px", padding: "12px"}}
              />
             <Line
-              //name="Average Temperature"
+              name="Average Temperature"
               type="monotone"
               dataKey="avg_temp1"
               strokeWidth={2}
-              stroke="#3be73b" // green = avg temp
+              stroke="#2ca82c" // green = avg temp
               dot={false}
               activeDot={{ r: 5 }} // slightly incr the radius of the dot that's moused over
             />
-            {/* <Line
+            <Line
               name="Minimum Temperature"
               type="monotone"
               dataKey="min_temp1"
+              strokeWidth={2}
               stroke="#3b94e7" // blue = cold temp
+              dot={false}
               activeDot={{ r: 5 }}
             />
             <Line
               name="Maximum Temperature"
               type="monotone"
               dataKey="max_temp1"
-              stroke="#e74a3b" // red = warm temp
+              strokeWidth={2}
+              stroke="#a82c2c" // red = warm temp
+              dot={false}
               activeDot={{ r: 5 }}
-            /> */}
+            />
           </LineChart>
         </ResponsiveContainer>
       </Card.Body>

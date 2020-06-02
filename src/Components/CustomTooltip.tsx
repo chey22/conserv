@@ -2,6 +2,7 @@ import React, { FC, useState, useEffect } from "react";
 import axios from "axios";
 import { Card, ListGroup } from "react-bootstrap";
 import moment from "moment";
+import { stat } from "fs";
 
 const DisplayTooltip = (props: any) => {
   const { payload, label } = props;
@@ -9,8 +10,8 @@ const DisplayTooltip = (props: any) => {
 //   const handleChange = (e: any) => {
 //     props.onChange(e.target.value);
 //   };
-headerLabel(label) {
-    if (label === data) {
+const headerLabel = (label: any)=> {
+    if (label === stat) {
         return "ok"
     }
 }

@@ -12,7 +12,7 @@ import {
 } from "recharts";
 import { Card } from "react-bootstrap";
 import moment from "moment";
-import CustomTooltip from "./CustomTooltip";
+import CustomTooltip from "../CustomTooltip";
 
 const Dewpoint: FC = () => {
   const [dew, setDew] = useState([]);
@@ -55,8 +55,8 @@ const Dewpoint: FC = () => {
             label={{value: 'Degrees (Celsius)', angle: -90, position: 'insideLeft', dx: -15, dy: 100, fontSize: 22}}
              />
             <CartesianGrid strokeDasharray="5 5" />
-            
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip />
+            {/* <Tooltip content={<CustomTooltip />} /> */}
             {/* <Tooltip
             formatter={function(value, name) {
               return `${value}`;
@@ -73,7 +73,7 @@ const Dewpoint: FC = () => {
               type="monotone"
               dataKey="avg_dewpoint"
               strokeWidth={2}
-              stroke="#3be73b" // green = avg temp
+              stroke="#2ca82c" // green = avg temp
               dot={false}
               activeDot={{ r: 5 }} // slightly incr the radius of the dot that's moused over
             />
