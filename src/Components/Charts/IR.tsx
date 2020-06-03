@@ -24,9 +24,9 @@ const CustomTooltip: FC = (props: any) => {
           {moment(data.bucket).utcOffset(0).format("MM/DD h:mm A")}
         </Card.Header>
         <ListGroup variant="flush">
-          <ListGroup.Item>Average RH: {data.avg_rh} %</ListGroup.Item>
-          <ListGroup.Item>Min RH: {data.min_rh} %</ListGroup.Item>
-          <ListGroup.Item>Max RH: {data.max_rh} %</ListGroup.Item>
+          <ListGroup.Item>Average IR: {data.avg_ir}</ListGroup.Item>
+          <ListGroup.Item>Min IR: {data.min_ir}</ListGroup.Item>
+          <ListGroup.Item>Max IR: {data.max_ir}</ListGroup.Item>
         </ListGroup>
       </Card>
     );
@@ -35,26 +35,26 @@ const CustomTooltip: FC = (props: any) => {
   return null;
 };
 
-const RH: FC = () => {
-  const [rh, setRH] = useState([]);
+const IR: FC = () => {
+  const [ir, setIR] = useState([]);
 
-  const getRH = async () => {
+  const getIR = async () => {
     let response = await axios.get("https://app.conserv.io/data/api/health/db");
-    let rh = response.data;
-    setRH(rh);
+    let ir = response.data;
+    setIR(ir);
   };
 
   useEffect(() => {
-    getRH();
+    getIR();
   }, []);
 
   return (
     <div className="card stacked-graph-card shadow-lg border-none my-5">
-      <Card.Header as="h4">Relative Humidity</Card.Header>
+      <Card.Header as="h4">Infrared</Card.Header>
       <Card.Body>
         <ResponsiveContainer width="100%" height={450}>
           <LineChart
-            data={rh}
+            data={ir}
             margin={{ top: 5, right: 30, left: 20, bottom: 40 }}
           >
             <XAxis
@@ -69,11 +69,11 @@ const RH: FC = () => {
               type="number"
               domain={["auto", "auto"]}
               label={{
-                value: "Percent (%)",
+                value: "Infrared Index",
                 angle: -90,
                 position: "insideLeft",
                 dx: -15,
-                dy: 60,
+                dy: 150,
                 fontSize: 22,
               }}
             />
@@ -81,29 +81,29 @@ const RH: FC = () => {
             <Tooltip content={<CustomTooltip />} />
             <Legend />
             <Line
-              name="Average RH"
+              name="Average IR"
               type="monotone"
-              dataKey="avg_rh"
+              dataKey="avg_ir"
               strokeWidth={2}
-              stroke="#2ca82c" // green = avg RH
+              stroke="#2ca82c" // green = avg IR
               dot={false}
               activeDot={{ r: 5 }}
             />
             {/* <Line
-              name="Minimum RH"
+              name="Minimum IR"
               type="monotone"
-              dataKey="min_rh"
+              dataKey="min_ir"
               strokeWidth={2}
-              stroke="#3b94e7" // blue = cold RH
+              stroke="#3b94e7" // blue = low IR
               dot={false}
               activeDot={{ r: 5 }}
             />
             <Line
-              name="Maximum RH"
+              name="Maximum IR"
               type="monotone"
-              dataKey="max_rh"
+              dataKey="max_ir"
               strokeWidth={2}
-              stroke="#a82c2c" // red = warm RH
+              stroke="#a82c2c" // red = high IR
               dot={false}
               activeDot={{ r: 5 }}
             /> */}
@@ -113,4 +113,4 @@ const RH: FC = () => {
     </div>
   );
 };
-export default RH;
+export default IR;

@@ -10,9 +10,31 @@ import {
   Line,
   ResponsiveContainer,
 } from "recharts";
-import { Card } from "react-bootstrap";
+import { Card, ListGroup } from "react-bootstrap";
 import moment from "moment";
-//import CustomTooltip from "../CustomTooltip";
+
+const CustomTooltip: FC = (props: any) => {
+  const { payload, active } = props;
+
+  if (active) {
+    const data = payload[0].payload;
+    return (
+      <Card style={{ width: "auto" }}>
+        <Card.Header>
+          {moment(data.bucket).utcOffset(0).format("MM/DD h:mm A")}
+        </Card.Header>
+        {/* "flush" removes double borders */}
+        <ListGroup variant="flush">
+          <ListGroup.Item>
+            Average Dewpoint: {data.avg_dewpoint} &deg;C{" "}
+          </ListGroup.Item>
+        </ListGroup>
+      </Card>
+    );
+  }
+
+  return null;
+};
 
 const Dewpoint: FC = () => {
   const [dew, setDew] = useState([]);
@@ -27,7 +49,6 @@ const Dewpoint: FC = () => {
     // });
 
     // let dewArr = dew.map(Object.values); // converts from array of objects to array of arrays
-    // console.log(dewArr);
 
     setDew(dew); // sets state after sorting chronologically
 
@@ -44,9 +65,6 @@ const Dewpoint: FC = () => {
     <div className="card stacked-graph-card shadow-lg border-none my-5">
       <Card.Header as="h4">Dewpoint</Card.Header>
       <Card.Body>
-        <Card.Title>
-          card title placeholder - how to put legend here if desired?
-        </Card.Title>
         <ResponsiveContainer width="100%" height={450}>
           <LineChart
             data={dew}
@@ -74,34 +92,20 @@ const Dewpoint: FC = () => {
               }}
             />
             <CartesianGrid strokeDasharray="5 5" />
-            <Tooltip />
-            {/* <Tooltip content={<CustomTooltip />} /> */}
-            {/* <Tooltip
-            formatter={function(value, name) {
-              return `${value}`;
-            }}
-            labelFormatter={function(value) {
-              return `label: ${value}`;
-            }}
-            /> */}
-            <Legend
-            //wrapperStyle={{position: "absolute", height: "60px", padding: "12px"}}
-            />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend />
             <Line
               name="Average Dewpoint"
               type="monotone"
               dataKey="avg_dewpoint"
               strokeWidth={2}
-              stroke="#2ca82c" // green = avg temp
+              stroke="#2ca82c"
               dot={false}
               activeDot={{ r: 5 }} // slightly incr the radius of the dot that's moused over
             />
           </LineChart>
         </ResponsiveContainer>
       </Card.Body>
-      <Card.Footer>
-        card footer placeholder - how to put legend here if desired?
-      </Card.Footer>
     </div>
   );
 };

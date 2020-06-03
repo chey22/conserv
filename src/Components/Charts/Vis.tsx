@@ -24,37 +24,36 @@ const CustomTooltip: FC = (props: any) => {
           {moment(data.bucket).utcOffset(0).format("MM/DD h:mm A")}
         </Card.Header>
         <ListGroup variant="flush">
-          <ListGroup.Item>Average RH: {data.avg_rh} %</ListGroup.Item>
-          <ListGroup.Item>Min RH: {data.min_rh} %</ListGroup.Item>
-          <ListGroup.Item>Max RH: {data.max_rh} %</ListGroup.Item>
+          <ListGroup.Item>Average Illuminance: {data.avg_vis} Lux</ListGroup.Item>
+          <ListGroup.Item>Min Illuminance: {data.min_vis} Lux</ListGroup.Item>
+          <ListGroup.Item>Max Illuminance: {data.max_vis} Lux</ListGroup.Item>
         </ListGroup>
       </Card>
     );
   }
-
   return null;
 };
 
-const RH: FC = () => {
-  const [rh, setRH] = useState([]);
+const Vis: FC = () => {
+  const [vis, setVis] = useState([]);
 
-  const getRH = async () => {
+  const getVis = async () => {
     let response = await axios.get("https://app.conserv.io/data/api/health/db");
-    let rh = response.data;
-    setRH(rh);
+    let vis = response.data;
+    setVis(vis);
   };
 
   useEffect(() => {
-    getRH();
+    getVis();
   }, []);
 
   return (
     <div className="card stacked-graph-card shadow-lg border-none my-5">
-      <Card.Header as="h4">Relative Humidity</Card.Header>
+      <Card.Header as="h4">Illuminance</Card.Header>
       <Card.Body>
         <ResponsiveContainer width="100%" height={450}>
           <LineChart
-            data={rh}
+            data={vis}
             margin={{ top: 5, right: 30, left: 20, bottom: 40 }}
           >
             <XAxis
@@ -69,11 +68,11 @@ const RH: FC = () => {
               type="number"
               domain={["auto", "auto"]}
               label={{
-                value: "Percent (%)",
+                value: "Degrees (Celsius)",
                 angle: -90,
                 position: "insideLeft",
                 dx: -15,
-                dy: 60,
+                dy: 100,
                 fontSize: 22,
               }}
             />
@@ -81,29 +80,29 @@ const RH: FC = () => {
             <Tooltip content={<CustomTooltip />} />
             <Legend />
             <Line
-              name="Average RH"
+              name="Average Illuminance"
               type="monotone"
-              dataKey="avg_rh"
+              dataKey="avg_vis"
               strokeWidth={2}
-              stroke="#2ca82c" // green = avg RH
+              stroke="#2ca82c" // green = avg vis
               dot={false}
               activeDot={{ r: 5 }}
             />
             {/* <Line
-              name="Minimum RH"
+              name="Minimum viserature"
               type="monotone"
-              dataKey="min_rh"
+              dataKey="min_vis"
               strokeWidth={2}
-              stroke="#3b94e7" // blue = cold RH
+              stroke="#3b94e7" // blue = low vis
               dot={false}
               activeDot={{ r: 5 }}
             />
             <Line
-              name="Maximum RH"
+              name="Maximum viserature"
               type="monotone"
-              dataKey="max_rh"
+              dataKey="max_vis"
               strokeWidth={2}
-              stroke="#a82c2c" // red = warm RH
+              stroke="#a82c2c" // red = high vis
               dot={false}
               activeDot={{ r: 5 }}
             /> */}
@@ -113,4 +112,4 @@ const RH: FC = () => {
     </div>
   );
 };
-export default RH;
+export default Vis;

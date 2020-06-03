@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from "react";
 import axios from "axios";
 import { ToggleButtonGroup, ToggleButton } from "react-bootstrap";
 
-const ButtTemp: FC = () => {
+const TestTemp: FC = () => {
     const [avTemp, setAvTemp] = useState([]);
   
     const getAvTemp = async () => {
@@ -63,7 +63,7 @@ const ButtTemp: FC = () => {
 
   return(
     // <div className="degreeToggle text-center">
-    //   <ToggleButtonGroup type="radio" name="options" defaultValue={celsius}>
+    //   <TogTestonGroup type="radio" name="options" defaultValue={celsius}>
     //     <ToggleButton
     //       variant="secondary"
     //       value={celsius}
@@ -83,4 +83,4 @@ const ButtTemp: FC = () => {
     null
   );
 }
-export default ButtTemp
+export default TestTemp

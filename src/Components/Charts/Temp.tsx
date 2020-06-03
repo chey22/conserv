@@ -10,43 +10,48 @@ import {
   Line,
   ResponsiveContainer,
 } from "recharts";
-import { Card } from "react-bootstrap";
+import { Card, ListGroup } from "react-bootstrap";
 import moment from "moment";
-//import CustomTooltip from "../CustomTooltip";
+
+const CustomTooltip: FC = (props: any) => {
+  const { payload, active } = props;
+
+  if (active) {
+    const data = payload[0].payload;
+    return (
+      <Card style={{ width: "auto" }}>
+        <Card.Header>
+          {moment(data.bucket).utcOffset(0).format("MM/DD h:mm A")}
+        </Card.Header>
+        <ListGroup variant="flush">
+          <ListGroup.Item>Average Temp: {data.avg_temp1} &deg;C</ListGroup.Item>
+          <ListGroup.Item>Min Temp: {data.min_temp1} &deg;C</ListGroup.Item>
+          <ListGroup.Item>Max Temp: {data.max_temp1} &deg;C</ListGroup.Item>
+        </ListGroup>
+      </Card>
+    );
+  }
+
+  return null;
+};
 
 const Temp: FC = () => {
   const [temp, setTemp] = useState([]);
 
-  const gettemp = async () => {
+  const getTemp = async () => {
     let response = await axios.get("https://app.conserv.io/data/api/health/db");
-
     let temp = response.data; // array of objects
-
-    // temp.sort(function (a: any, b: any) { // sorts by bucket. likely unnecessary since API does too
-    //   return a.bucket - b.bucket;
-    // });
-
-    // let tempArr = temp.map(Object.values); // converts from array of objects to array of arrays
-    // console.log(tempArr);
-
     setTemp(temp); // sets state after sorting chronologically
-
-    // for (var k in temp) { // this doubles the array for some reason unless placed after the state is set. *still doubles chart lines, so likely unnecessary
-    //   temp.push(temp[k]);
-    // }
   };
 
   useEffect(() => {
-    gettemp();
+    getTemp();
   }, []); // pass in values that you want to monitor for changes into the array in second arg
 
   return (
     <div className="card stacked-graph-card shadow-lg border-none my-5">
       <Card.Header as="h4">Temperature</Card.Header>
       <Card.Body>
-        <Card.Title>
-          card title placeholder - how to put legend here if desired?
-        </Card.Title>
         <ResponsiveContainer width="100%" height={450}>
           <LineChart
             data={temp}
@@ -54,12 +59,11 @@ const Temp: FC = () => {
           >
             <XAxis
               dataKey="bucket"
-              angle={30} // eliminates need for margin for ticks on angle
+              angle={30}
               textAnchor="start"
               tickFormatter={(timestamp) =>
                 moment(timestamp).utcOffset(0).format("MM/DD h:mm A")
-              } //UTC offset set to none bc bucket was 5 hours ahead of local time
-              //interval={8} leave off for cleaner window minimizing
+              }
             />
             <YAxis
               type="number"
@@ -74,19 +78,8 @@ const Temp: FC = () => {
               }}
             />
             <CartesianGrid strokeDasharray="5 5" />
-            <Tooltip />
-            {/* <Tooltip content={<CustomTooltip />} /> */}
-            {/* <Tooltip
-            formatter={function(value, name) {
-              return `${value}`;
-            }}
-            labelFormatter={function(value) {
-              return `label: ${value}`;
-            }}
-            /> */}
-            <Legend
-            //wrapperStyle={{position: "absolute", height: "60px", padding: "12px"}}
-            />
+            <Tooltip content={<CustomTooltip />} />
+            <Legend />
             <Line
               name="Average Temperature"
               type="monotone"
@@ -94,7 +87,7 @@ const Temp: FC = () => {
               strokeWidth={2}
               stroke="#2ca82c" // green = avg temp
               dot={false}
-              activeDot={{ r: 5 }} // slightly incr the radius of the dot that's moused over
+              activeDot={{ r: 5 }}
             />
             {/* <Line
               name="Minimum Temperature"
@@ -117,9 +110,6 @@ const Temp: FC = () => {
           </LineChart>
         </ResponsiveContainer>
       </Card.Body>
-      <Card.Footer>
-        card footer placeholder - how to put legend here if desired?
-      </Card.Footer>
     </div>
   );
 };
