@@ -1,13 +1,12 @@
 import React, { FC } from "react";
 import { Navbar, Nav } from "react-bootstrap";
-
-//interface NavbarProps extends RouteComponentProps { };
+import Header from "./Header";
 
 const Navi: FC = () => {
   return (
-    <nav className="navbar-expand-md navbar-white sticky-top">
-      <Navbar bg="white">
-        <Navbar.Brand href="#home">
+    <nav className="navbar-expand-lg navbar-white sticky-top">
+      <Navbar bg="light">
+        <Navbar.Brand href="https://start.conserv.io/">
           <img
             src="assets/Conserv500.png"
             width="300px"
@@ -15,8 +14,13 @@ const Navi: FC = () => {
             className="d-inline-block align-top"
           />{" "}
         </Navbar.Brand>
-        <Nav className="ml-auto">Account</Nav>
+        <Nav className="ml-auto">
+        <Nav.Link href="/home">Settings</Nav.Link>
+          <Nav.Link href="https://support.conserv.io/knowledge/scoring-and-standards">Help Center</Nav.Link>
+          <Nav.Link href="/home">Log Out</Nav.Link>
+        </Nav>
       </Navbar>
+      <Header />
     </nav>
   );
 };

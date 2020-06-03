@@ -22,7 +22,7 @@ const Dewpoint: FC = () => {
 
     let dew = response.data; // array of objects
 
-    // dew.sort(function (a: any, b: any) { // sorts by bucket. likely unnecessary since API does too 
+    // dew.sort(function (a: any, b: any) { // sorts by bucket. likely unnecessary since API does too
     //   return a.bucket - b.bucket;
     // });
 
@@ -44,7 +44,9 @@ const Dewpoint: FC = () => {
     <div className="card stacked-graph-card shadow-lg border-none my-5">
       <Card.Header as="h4">Dewpoint</Card.Header>
       <Card.Body>
-        <Card.Title>card title placeholder - how to put legend here if desired?</Card.Title>
+        <Card.Title>
+          card title placeholder - how to put legend here if desired?
+        </Card.Title>
         <ResponsiveContainer width="100%" height={450}>
           <LineChart
             data={dew}
@@ -97,7 +99,9 @@ const Dewpoint: FC = () => {
           </LineChart>
         </ResponsiveContainer>
       </Card.Body>
-      <Card.Footer>card footer placeholder - how to put legend here if desired?</Card.Footer>
+      <Card.Footer>
+        card footer placeholder - how to put legend here if desired?
+      </Card.Footer>
     </div>
   );
 };

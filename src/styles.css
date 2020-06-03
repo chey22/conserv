@@ -1,9 +1,11 @@
-/* .navi {
-    position: sticky;
-    top: 0;
-    width: 100%;
-    font-size: 20px;
-} */
+.headline {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #b5e7b5;
+    text-align: center;
+}
 
 .footer {
   background-color: #e74a3b;
@@ -11,18 +13,18 @@
   width: 100%;
   color: white;
   text-align: center;
-  font-size: 20px;
-  padding: 40px;
+  font-size: 15px;
+padding-top: 10px;
+}
+
+.footer a {    
+    color: white;
+    text-decoration: underline;
 }
 
 .degreeToggle {
     display: inline;
 }
-
-/* selects all button elements inside .chart */
-/* .chart button {
-    background-color: #e74a3b;
-} */
 
 .card-header {
     background-color: #686868;
@@ -34,3 +36,22 @@
     top: 50px;
     font-size: 20px;
 }
+/* .navbar {
+    
+    position: sticky;
+    top: 0;
+    width: 100%;
+    font-size: 20px;
+} */
+
+/* .navbar-nav {
+    display: flex;
+    flex-direction: row;
+    flex-flow: row nowrap;
+    justify-content: end;
+    align-items: center;
+    position: relative;
+    margin-left: auto;
+} */
+
+/* selects all element classNames that include 'headline' inside .contents */

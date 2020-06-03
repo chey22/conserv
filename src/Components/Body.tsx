@@ -10,6 +10,7 @@ const Body: FC = () => {
         <div className="row">
           <div>
             <h1>other - Conserv.io has Facility, Sensor, Range, etc dropdowns</h1>
+            <h5>"Questions about ranges? Read more here: https://support.conserv.io/knowledge/scoring-and-standards" (this will also ne in nav dropdown)</h5>
           </div>
         </div>
         <div className="row">

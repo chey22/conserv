@@ -22,7 +22,7 @@ const Temp: FC = () => {
 
     let temp = response.data; // array of objects
 
-    // temp.sort(function (a: any, b: any) { // sorts by bucket. likely unnecessary since API does too 
+    // temp.sort(function (a: any, b: any) { // sorts by bucket. likely unnecessary since API does too
     //   return a.bucket - b.bucket;
     // });
 
@@ -44,7 +44,9 @@ const Temp: FC = () => {
     <div className="card stacked-graph-card shadow-lg border-none my-5">
       <Card.Header as="h4">Temperature</Card.Header>
       <Card.Body>
-        <Card.Title>card title placeholder - how to put legend here if desired?</Card.Title>
+        <Card.Title>
+          card title placeholder - how to put legend here if desired?
+        </Card.Title>
         <ResponsiveContainer width="100%" height={450}>
           <LineChart
             data={temp}
@@ -94,7 +96,7 @@ const Temp: FC = () => {
               dot={false}
               activeDot={{ r: 5 }} // slightly incr the radius of the dot that's moused over
             />
-                        {/* <Line
+            {/* <Line
               name="Minimum Temperature"
               type="monotone"
               dataKey="min_temp1"
@@ -115,7 +117,9 @@ const Temp: FC = () => {
           </LineChart>
         </ResponsiveContainer>
       </Card.Body>
-      <Card.Footer>card footer placeholder - how to put legend here if desired?</Card.Footer>
+      <Card.Footer>
+        card footer placeholder - how to put legend here if desired?
+      </Card.Footer>
     </div>
   );
 };
