@@ -72,8 +72,8 @@ const Dewpoint: FC = () => {
           >
             <XAxis
               dataKey="bucket"
-              angle={30} // eliminates need for margin for ticks on angle
-              textAnchor="start"
+              angle={30}
+              textAnchor="start" // eliminates need for margin for ticks on angle
               tickFormatter={(timestamp) =>
                 moment(timestamp).utcOffset(0).format("MM/DD h:mm A")
               } //UTC offset set to none bc bucket was 5 hours ahead of local time
