@@ -73,7 +73,7 @@ const IR: FC = () => {
                 angle: -90,
                 position: "insideLeft",
                 dx: -15,
-                dy: 150,
+                dy: 80,
                 fontSize: 22,
               }}
             />

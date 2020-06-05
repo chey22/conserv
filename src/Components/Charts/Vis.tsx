@@ -68,11 +68,11 @@ const Vis: FC = () => {
               type="number"
               domain={["auto", "auto"]}
               label={{
-                value: "Degrees (Celsius)",
+                value: "Lux",
                 angle: -90,
                 position: "insideLeft",
                 dx: -15,
-                dy: 100,
+                dy: 30,
                 fontSize: 22,
               }}
             />
