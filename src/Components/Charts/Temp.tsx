@@ -18,6 +18,7 @@ const CustomTooltip: FC = (props: any) => {
 
   if (active) {
     const data = payload[0].payload;
+    console.log(data)
     return (
       <Card style={{ width: "auto" }}>
         <Card.Header>
